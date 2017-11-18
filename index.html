@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Pixel Sketch</title>
+    <!-- Emojis! -->
+    <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+    <!-- My CSS -->
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+
+    <nav>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <span class="help">click the hamburger!</span>
+      <div class="menu">
+        <div class="resizeSection">
+          <input type="text" class="resizeInput">
+          <a class="resize">Resize</a>
+          <span>
+            Select a number between 1-100.
+            Or select one greater than 100 ;)
+          </span>
+        </div>
+        <div class="strokeStyle">
+          <a>stroke style <i class="fa fa-pencil" aria-hidden="true"></i></a>
+          <div class="options">
+            <div class="rounded"></div>
+            <div class="squares"></div>
+          </div>
+        </div>
+        <!--<button type="button" class="pixelStyle">Rounded</button>-->
+        <button type="button" class="restart">Restart</button>
+        <button type="button" class="disco">Disco! <i class="em em-dancer"></i></button>
+        <button type="button" class="home">Go home <i class="em em-crying_cat_face"></i></button>
+        <input type="text" class="picker">
+        <button type="button" class="strokeColor">Change Stroke Color</button>
+        <input type="text" class="backgroundColorInput" placeholder="Set background color here">
+        <button type="button" class="setBackground">Background Color</button>
+        <button type="button" class="rainbow">Rainbow</button>
+        <button type="button" class="fading">Fading</button>
+      </div>
+    </nav>
+
+    <!-- <button type="button" class="about">Sing about me</button> -->
+
+    <main>
+      <h1><em>Pixel Sketch</em><i class="fa fa-paint-brush" aria-hidden="true"></i></h1>
+      <div class="sketchPad">
+      </div>
+    </main>
+
+    <!-- Font Awesome Icons -->
+    <script src="https://use.fontawesome.com/0ef397ec7b.js"></script>
+    <script type="text/javascript"" src="app.js"></script>
+  </body>
+</html>

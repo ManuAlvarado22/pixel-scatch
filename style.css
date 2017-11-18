@@ -1,0 +1,289 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster|Roboto');
+
+body {
+  background: linear-gradient(90deg, pink, dodgerblue);
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+}
+
+nav div.hamburger {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  position: absolute;
+}
+
+nav div.menu {
+  position: absolute;
+  top: 40px;
+  bottom: 0;
+  /*Always displayed for coding*/
+  left: calc(-220px - 2.2em);
+  width: 220px;
+  padding: 1em 1.1em;
+  /*transform: translateX(-140px);*/
+  transition: 1s ease-in-out;
+  /*background: linear-gradient(#1ce, rgba(22, 206, 151, 0.8) 80%), url("images/crying_pixelcat.png");
+  background-repeat: repeat-y;
+  background-position: left center;*/
+  /*background: url("images/pusheen_drawing.gif");*/
+  background: linear-gradient(#FFC0CB 30%, rgba(255, 255, 255, 0.2)), url("images/pusheen_drawing.gif");
+  background-position: bottom;
+  /*background-size: cover;*/
+  /*background-color: linear-gradient();*/
+}
+
+nav div.menu * {
+  font-family: 'Roboto', sans-serif;;
+}
+
+nav span.help {
+  text-transform: capitalize;
+  position: absolute;
+  left: 55px;
+  top: 12px;
+  color: #FFF;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;;
+  opacity: 0;
+}
+
+nav span.helpText {
+  animation: nice 4s ease;
+}
+
+@keyframes nice {
+  0% {opacity: 0;}
+  25% {opacity: 1;}
+  50% {opacity: 0;}
+  75% {opacity: 1;}
+  100% {opacity: 0;}
+}
+
+.navAppear {
+  transform: translateX(calc(220px + 2.2em));
+}
+
+nav div.menu * {
+  margin-bottom: 10px;
+}
+
+div.hamburger span {
+  margin-bottom: 4px;
+  width: 32px;
+  height: 5px;
+  border-radius: 5px;
+  background-color: #FFF;
+  position: relative;
+  top: 10px;
+  left: 10px;
+  transform-origin: left center;
+  transition: 0.5s ease-in-out;
+}
+
+div.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg);
+  top: 6px;
+}
+
+div.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+div.hamburger.open span:nth-child(2) {
+  width: 0%;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  text-align: center;
+  font-family: 'Lobster', cursive;
+  font-size: 3em;
+  letter-spacing: 3px;
+  color: rgba(255, 127, 80, 0.9);
+}
+
+div.sketchPad {
+  background-color: #FFF;
+  width: 420px;
+  height: 420px;
+  margin: 0 auto;
+  border-radius: 5px;
+  box-shadow: 0 5px 15px -5px dodgerblue;
+  transition: box-shadow 1s ease;
+}
+
+div.sketchPad:hover {
+  box-shadow: 0 3px 18px 0px dodgerblue;
+}
+
+input[type="text"] {
+  border-radius: 4px;
+  height: 20px;
+  border: none;
+  background-color: rgba(255, 255, 255, .5);
+}
+
+input[type="text"]:focus {
+  outline: none;
+}
+
+.pixel {
+  float: left;
+}
+
+.round {
+  border-radius: 10px;
+}
+
+.home, .disco {
+  box-sizing: content-box;
+}
+
+.home {
+  display: none;
+}
+
+.rainbow {
+  color: #FFF;
+  border: none;
+  font-size: 1em;
+  padding: 4px 12px;
+  border-radius: 3px;
+}
+
+.fading {
+  color: #FFF;
+  background-color: #444;
+  border: none;
+  font-size: 1em;
+  padding: 4px 12px;
+  border-radius: 3px;
+}
+
+.resizeSection a {
+
+}
+
+.resizeSection a + span {
+  position: absolute;
+  top: 10px;
+  left: 125px;
+  width: 180px;
+  padding: 0 10px;
+  border-radius: 5px;
+  font-size: 10px;
+  background-color: #666;
+  color: #FFF;
+  line-height: 20px;
+  opacity: 0;
+}
+
+.resizeSection a:hover + span {
+  animation: cute .5s ease forwards;
+}
+
+@keyframes cute {
+  0% {opacity: 0.2;}
+  50% {opacity: 0.7;}
+  100% {opacity: 1;}
+}
+
+.resizeSection input.resizeInput {
+  width: 52px;
+  /*transition: 0.3s ease;*/
+}
+
+/*.resizeSection input.resizeInput:focus {
+  width: 152px;
+}*/
+
+div.strokeStyle {
+
+}
+
+div.strokeStyle a {
+  /*font-size: 3em;*/
+  margin: 0;
+  color: #111;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+div.strokeStyle div.options {
+  display: flex;
+  width: 50%;
+  margin: 0 40px;
+  justify-content: space-around;
+}
+
+div.strokeStyle div.options div:nth-child(1) {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+}
+
+div.strokeStyle div.options div:nth-child(2) {
+  width: 20px;
+  height: 20px;
+}
+
+div.strokeStyle div.options * {
+  cursor: pointer;
+}
+
+.wrong {
+  animation: swing 1s ease;
+}
+
+@keyframes swing {
+  15% {
+    transform: translateX(5px);
+  }
+  30% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(3px);
+  }
+  70% {
+    transform: translateX(-3px);
+  }
+  90% {
+    transform: translateX(2px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.rainbowButton {
+  filter:hue-rotate(0deg);
+  background:linear-gradient(45deg,#9cf,#1ce);
+  animation:hue 10000ms infinite linear;
+}
+
+@keyframes hue {
+  0%{filter: hue-rotate(0deg);}
+  100%{filter:hue-rotate(360deg);}
+}
+
+.fadingButton {
+  color: #555;
+  background-color: lightyellow;
+  border: 1px solid orange;
+}
+
+div.colorVisualizer {
+  width: 60px;
+  height: 60px;
+  border: 1px solid black;
+  margin-bottom: 10px;
+}
