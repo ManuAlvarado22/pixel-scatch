@@ -1,17 +1,16 @@
 const sketchPad = document.querySelector("div.sketchPad");
 const resizeInput = document.querySelector("input.resizeInput");
 const resize = document.querySelector("a.resize");
-// const pixelStyle = document.querySelector("button.pixelStyle");
 const rounded = document.querySelector("div.rounded");
 const squares = document.querySelector("div.squares");
-const restart = document.querySelector("button.restart");
+const restart = document.querySelector("a.restart");
 const rainbow = document.querySelector("button.rainbow");
-const disco = document.querySelector("button.disco");
-const home = document.querySelector("button.home");
-const colorPicker = document.querySelector("input.picker");
-const strokeColorButton = document.querySelector("button.strokeColor");
-const bgColorInput = document.querySelector("input.backgroundColorInput");
-const bgColorButton = document.querySelector("button.setBackground");
+const disco = document.querySelector("a.disco");
+const home = document.querySelector("a.home");
+const strokeColorVisualizer = document.querySelector("div.strokeColorVisualizer");
+const bgColorVisualizer = document.querySelector("div.bgColorVisualizer");
+const strokeColorPicker = document.querySelector("input.strokeColorPicker");
+const bgColorPicker = document.querySelector("input.bgColorPicker");
 const fading = document.querySelector("button.fading");
 const hamburger = document.querySelector("div.hamburger");
 const navbar = document.querySelector("nav div.menu");
@@ -24,16 +23,9 @@ let isFading = false;
 let currentColor;
 let currentBgColor = "#FFF";
 
-// You want to get the color and opacity back
-// when deactivating rainbow with fading active
-
-// Make sure to check the setStrokeColor function
-// It's probably your biggest problem
-// Muou >:
-
 // Random Hex Color generator!
 // A little bit stolen from
-// Colt Steele CodePen
+// Colt Steele's CodePen
 
 const hexGen = () =>
   "#" + (co = (lor) => {
@@ -43,7 +35,7 @@ const hexGen = () =>
   })('');
 
 currentColor = hexGen();
-rounded.style.backgroundColor = currentColor;
+rounded.style.border = "1px solid " + currentColor;
 squares.style.backgroundColor = currentColor;
 
 function setPad(value) {
@@ -71,6 +63,10 @@ function setPad(value) {
   divArray.forEach(e => sketchPad.appendChild(e));
 }
 
+// What users will see at the
+// start of the app
+setPad(10);
+
 function clearPad() {
   while (sketchPad.firstChild) {
     sketchPad.removeChild(sketchPad.firstChild);
@@ -81,13 +77,14 @@ function setStrokeColor() {
   const pixelElement = document.querySelectorAll(".pixel");
   for (let i = 0; i < pixelElement.length; i++) {
     pixelElement[i].addEventListener("mouseover", function() {
-      this.style.backgroundColor = colorPicker.value;
+      this.style.backgroundColor = currentColor;
     });
   };
   isRainbow = false;
-  currentColor = colorPicker.value;
-  rounded.style.backgroundColor = currentColor;
-  squares.style.backgroundColor = currentColor;
+  if (isRounded) rounded.style.backgroundColor = currentColor;
+  else squares.style.backgroundColor = currentColor;
+  squares.style.border = "1px solid " + currentColor;
+  rounded.style.border = "1px solid " + currentColor;
 }
 
 function rainbowOn() {
@@ -100,7 +97,6 @@ function rainbowOn() {
   };
   rainbow.classList.add("rainbowButton")
   isRainbow = true;
-  // Maybe
   if (isFading) fadingOff();
 }
 
@@ -123,30 +119,11 @@ function fadingOnCallback() {
   this.style.opacity = Number(this.style.opacity) + 0.1;
 }
 
-// Oh beautiful arrow functions
-// I'm using them because i need this
-// To be the fading button
-
-// Didn't work >:
-
 function fadingOn() {
   fading.classList.add("fadingButton");
   isFading = true;
-  // This will go inside a function!
   const pixelElement = document.querySelectorAll(".pixel");
-  // if (isRainbow) {
-  //   setStrokeColor();
-  //   // Check this
-  //   rainbowOff();
-  // }
   for (let i = 0; i < pixelElement.length; i++) {
-    // console.log(pixelElement[i].style.opacity);
-    // if (pixelElement[i].style.opacity > 0.1)//.backgroundColor !== '') // pixelElement[i].style.opacity = 0.1;
-    //   pixelElement[i].addEventListener("mouseover", function() {
-    //     this.style.opacity = "0.1";
-    //   });
-    //   console.log(pixelElement[i].style.opacity);
-    // if (pixelElement[i].style.opacity !== '' && pixelElement[i].style.backgroundColor === '') pixelElement[i].style.opacity = '';
     pixelElement[i].removeEventListener("mouseover", fadingOffCallback, false);
     pixelElement[i].addEventListener("mouseover", fadingOnCallback);
   };
@@ -159,40 +136,16 @@ function fadingOn() {
 function fadingOff() {
   fading.classList.remove("fadingButton");
   isFading = false;
-  // This will go inside a function!
   const pixelElement = document.querySelectorAll(".pixel");
   for (let i = 0; i < pixelElement.length; i++) {
     pixelElement[i].removeEventListener("mouseover", fadingOnCallback, false);
     pixelElement[i].addEventListener("mouseover", fadingOffCallback);
   };
-  // Just Testing
-  // setStrokeColor();
-  // I don't think so ):
 };
 
 const helpMessage = setInterval(function() {
   help.classList.toggle("helpText");
 }, 4000);
-
-setPad(10);
-// let currentSize = 10;
-
-// pixelStyle.addEventListener("click", function() {
-//   const pixelElement = document.querySelectorAll(".pixel");
-//   if (this.textContent === "Rounded"){
-//     this.textContent = "Squares";
-//     isRounded = true;
-//   }
-//   else {
-//     this.textContent = "Rounded";
-//     isRounded = false;
-//   }
-//
-//   for (let i = 0; i < pixelElement.length; i++) {
-//     pixelElement[i].classList.toggle("round");
-//   }
-//
-// });
 
 rounded.addEventListener("click", function(){
   if (!isRounded) {
@@ -200,6 +153,9 @@ rounded.addEventListener("click", function(){
     for (let i = 0; i < pixelElement.length; i++) {
       pixelElement[i].classList.add("round");
     }
+    rounded.style.backgroundColor = currentColor;
+    squares.style.border = "1px solid " + currentColor;
+    squares.style.backgroundColor = '';
     isRounded = true;
   }
 });
@@ -210,6 +166,9 @@ squares.addEventListener("click", function(){
     for (let i = 0; i < pixelElement.length; i++) {
       pixelElement[i].classList.remove("round");
     }
+    squares.style.backgroundColor = currentColor;
+    rounded.style.border = "1px solid " + currentColor;
+    rounded.style.backgroundColor = '';
     isRounded = false;
   }
 });
@@ -222,7 +181,7 @@ resize.addEventListener("click", function() {
     // currentSize = resizeValue;
     resizeInput.value = '';
     if(dancing) {
-      disco.style.display = "inline";
+      disco.style.display = "inline-block";
       home.style.display = "none";
     }
   }
@@ -247,22 +206,11 @@ restart.addEventListener("click", function() {
   if (dancing) {
     clearInterval(discoInterval);
     home.style.display = "none";
-    disco.style.display = "inline";
+    disco.style.display = "inline-block";
   }
-  // We'll see
-  // if (isRainbow) rainbowOff();
 });
 
 rainbow.addEventListener("click", function() {
-  // const pixelElement = document.querySelectorAll(".pixel");
-  // for (let i = 0; i < pixelElement.length; i++) {
-  //   pixelElement[i].addEventListener("mouseover", function() {
-  //       this.style.backgroundColor = hexGen();
-  //       this.style.opacity = 1;
-  //   });
-  // };
-  // rainbow.classList.add("rainbowButton")
-  // isRainbow = true;
   if (!this.classList.contains("rainbowButton")) rainbowOn();
   else rainbowOff();
 });
@@ -279,7 +227,7 @@ disco.addEventListener("click", function() {
       pixelElement[i].style.opacity]);
   };
   this.style.display = "none";
-  home.style.display = "inline";
+  home.style.display = "inline-block";
   discoInterval = setInterval(function() {
     for (let i = 0; i < pixelElement.length; i++) {
       pixelElement[i].style.opacity = 1;
@@ -292,9 +240,8 @@ disco.addEventListener("click", function() {
 home.addEventListener("click", function() {
   const pixelElement = document.querySelectorAll(".pixel");
   this.style.display = "none";
-  disco.style.display = "inline";
+  disco.style.display = "inline-block";
   clearInterval(discoInterval);
-  // console.log(saveDrawing);
   saveDrawing.forEach((e, i) => {
     pixelElement[i].style.backgroundColor = e[0];
     pixelElement[i].style.opacity = e[1];
@@ -302,33 +249,7 @@ home.addEventListener("click", function() {
   dancing = false;
 });
 
-strokeColorButton.addEventListener("click", function(){
-  setStrokeColor();
-});
-
-bgColorButton.addEventListener("click", function() {
-  currentBgColor = bgColorInput.value;
-  bgColorInput.value = '';
-  sketchPad.style.backgroundColor = currentBgColor;
-});
-
 fading.addEventListener("click", function() {
-  // this.classList.toggle("fadingButton");
-  // This will go inside a function!
-  // const pixelElement = document.querySelectorAll(".pixel");
-  // if (isRainbow) {
-  //   setStrokeColor();
-  //   // Check this
-  //   rainbowOff();
-  // }
-  // for (let i = 0; i < pixelElement.length; i++) {
-  //     //if (pixelElement[i].style.backgroundColor === '') pixelElement[i].style.opacity = 0.1;
-  //     pixelElement[i].addEventListener("mouseover", function() {
-  //       this.style.opacity = Number(this.style.opacity) + 0.1;
-  //     });
-  // };
-  // isFading = true;
-  // And here it is!
   if (!isRainbow) {
     if (this.classList.contains("fadingButton")) fadingOff();
     else fadingOn();
@@ -345,4 +266,40 @@ hamburger.addEventListener("click", function() {
   navbar.classList.toggle("navAppear");
   this.classList.toggle("open");
   clearInterval(helpMessage);
+});
+
+strokeColorPicker.addEventListener("keyup", function() {
+  strokeColorVisualizer.style.backgroundColor = this.value;
+  if (strokeColorVisualizer.style.backgroundColor !== '')
+    strokeColorVisualizer.style.cursor = "pointer";
+  else
+    strokeColorVisualizer.style.cursor = '';
+});
+
+bgColorPicker.addEventListener("keyup", function() {
+  bgColorVisualizer.style.backgroundColor = this.value;
+  if (bgColorVisualizer.style.backgroundColor !== '')
+    bgColorVisualizer.style.cursor = "pointer";
+  else
+    bgColorVisualizer.style.cursor = '';
+});
+
+strokeColorVisualizer.addEventListener("click", function() {
+  if (this.style.cursor === "pointer") {
+    currentColor = strokeColorVisualizer.style.backgroundColor;
+    setStrokeColor();
+    this.style.backgroundColor = '';
+    strokeColorPicker.value = '';
+    this.style.cursor = '';
+  }
+});
+
+bgColorVisualizer.addEventListener("click", function() {
+  if (this.style.cursor === "pointer") {
+    currentBgColor = bgColorVisualizer.style.backgroundColor
+    sketchPad.style.backgroundColor = currentBgColor;
+    this.style.backgroundColor = '';
+    bgColorPicker.value = '';
+    this.style.cursor = '';
+  }
 });
