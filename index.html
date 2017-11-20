@@ -29,26 +29,38 @@
           </span>
         </div>
         <div class="strokeStyle">
-          <a>stroke style <i class="fa fa-pencil" aria-hidden="true"></i></a>
           <div class="options">
             <div class="rounded"></div>
             <div class="squares"></div>
           </div>
         </div>
         <!--<button type="button" class="pixelStyle">Rounded</button>-->
-        <button type="button" class="restart">Restart</button>
-        <button type="button" class="disco">Disco! <i class="em em-dancer"></i></button>
-        <button type="button" class="home">Go home <i class="em em-crying_cat_face"></i></button>
-        <input type="text" class="picker">
-        <button type="button" class="strokeColor">Change Stroke Color</button>
-        <input type="text" class="backgroundColorInput" placeholder="Set background color here">
-        <button type="button" class="setBackground">Background Color</button>
-        <button type="button" class="rainbow">Rainbow</button>
-        <button type="button" class="fading">Fading</button>
+
+        <div class="colorPicker">
+          <div class="setStrokeColor">
+            <input type="text" class="colorInput strokeColorPicker" placeholder="Stroke Color">
+            <div class="visualizer strokeColorVisualizer"></div>
+          </div>
+          <div class="setBgColor">
+            <input type="text" class="colorInput bgColorPicker" placeholder="Canvas Color">
+            <div class="visualizer bgColorVisualizer"></div>
+          </div>
+        </div>
+
+
+        <div class="rainbowFading">
+          <button type="button" class="rainbow">Rainbow</button>
+          <button type="button" class="fading">Fading</button>
+        </div>
+
+        <div class="lastOptions">
+          <a type="button" class="restart">Clear</a>
+          <a type="button" class="disco"><i class="em em-dancer"></i></a>
+          <a type="button" class="home"><i class="em em-crying_cat_face"></i></a>
+        </div>
+
       </div>
     </nav>
-
-    <!-- <button type="button" class="about">Sing about me</button> -->
 
     <main>
       <h1><em>Pixel Sketch</em><i class="fa fa-paint-brush" aria-hidden="true"></i></h1>
